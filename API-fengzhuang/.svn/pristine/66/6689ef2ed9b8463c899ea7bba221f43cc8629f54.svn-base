@@ -1,0 +1,61 @@
+<%inherit file="/home_application/base_new.html"/>
+
+<%block name="css">
+<!--本模块加载的css-->
+<link href="${STATIC_URL}assets/art-dialog/css/dialog.css" rel="stylesheet" type="text/css" />
+</%block>
+
+
+<%block name="content">
+
+<!-- Page Heading -->
+<div class="row page-header-box">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            网络管理
+        </h1>
+    </div>
+</div>
+
+<div class="main-wrap">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            网络列表
+        </div>
+
+        <div class='panel-body'>
+            <div class="panel-content">
+                <table id="network_manage_record" class="table table-bordered table-hover table-striped">
+                    <thead>
+                    <tr>
+                        <th>vSwitch名称</th>
+                        <th>所属主机</th>
+                        <th>最大传输包</th>
+                        <th>端口数</th>
+                        <th>可用端口数</th>
+                        <th>端口组信息</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+<style>
+    .tab-content-hide-border{
+        border: none !important;
+    }
+</style>
+
+
+
+</%block>
+
+<%block name="script">
+<!--本模块加载的脚本-->
+<script type="text/javascript" src="${STATIC_URL}assets/art-dialog/dist/dialog.js"></script>
+<script type="text/javascript" src="${STATIC_URL}assets/twitter-bootstrap-wizard/jquery.bootstrap.wizard.js"></script>
+<script type="text/javascript" src="${STATIC_URL}assets/twitter-bootstrap-wizard/prettify.js"></script>
+<script type="text/javascript" src="${STATIC_URL}js/network_manage.js"></script>
+</%block>

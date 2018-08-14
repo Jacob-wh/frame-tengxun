@@ -1,0 +1,81 @@
+<%inherit file="/base.html"/>
+<%block name="cssfile">
+
+<!-- Bootstrap css -->
+<link href="${STATIC_URL}assets/bootstrap-3.3.4/css/bootstrap.min.css" rel="stylesheet">
+<link href="${STATIC_URL}assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+<!-- 当前项目样式文件 -->
+<link href="${STATIC_URL}css/sb-admin.css" rel="stylesheet">
+<link href="${STATIC_URL}css/sb-bk-theme.css" rel="stylesheet">
+<!--蓝鲸提供的公用样式库 -->
+<link href="${STATIC_URL}css/bk.css" rel="stylesheet">
+
+<!--前端开发者提供的样式 -->
+<!--<link href="${STATIC_URL}css/alert.css" rel="stylesheet">-->
+
+<!--animate样式 -->
+<link href="${STATIC_URL}css/animate.css" rel="stylesheet" >
+
+<link href="${STATIC_URL}assets/select2-3.5.2/select2.css" rel="stylesheet">
+<link href="${STATIC_URL}assets/jquery.sumoselect-2.0.0/sumoselect.css" rel="stylesheet">
+<link href="${STATIC_URL}assets/mCustomScrollbar-3.0.9/jquery.mCustomScrollbar.css" rel="stylesheet">
+
+<!-- datatables css -->
+<link href="${STATIC_URL}assets/datatables-1.10.15/media/css/dataTables.bootstrap.css" rel="stylesheet"/>
+<link href="${STATIC_URL}assets/datatables-1.10.15/extensions/Select/css/select.bootstrap.css" rel="stylesheet"></link>
+<link href="${STATIC_URL}assets/datatables-1.10.15/extensions/checkboxes/css/dataTables.checkboxes.css" rel="stylesheet"></link>
+<link href="${STATIC_URL}assets/datatables-1.10.15/extensions/Buttons/css/buttons.bootstrap.css" rel="stylesheet"></link>
+
+<!-- datatables css -->
+
+<link href="${STATIC_URL}assets/toastr/toastr.css" rel="stylesheet">
+<!-- 如果要使用Bootstrap的js插件，必须先调入jQuery -->
+<script src="${STATIC_URL}assets/jquery-1.10.2.min.js"></script>
+<!-- 包括所有bootstrap的js插件或者可以根据需要使用的js插件调用　-->
+<script src="${STATIC_URL}assets/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+
+
+
+<!-- 以下两个插件用于在IE8以及以下版本浏览器支持HTML5元素和媒体查询，如果不需要用可以移除 -->
+<!-- <script src="https://magicbox.bkclouds.cc/static_api/v3/assets/js/html5shiv.min.js"></script>
+     <script src="https://magicbox.bkclouds.cc/static_api/v3/assets/js/respond.min.js"></script> -->
+<!--[if lt IE 9]>
+<script src="${STATIC_URL}js/magicbox.html5shiv.min.js"></script>
+<script src="${STATIC_URL}js/magicbox.respond.min.js"></script>
+<![endif]-->
+<script type="text/javascript">
+    var app_id = "${APP_ID}";
+    var site_url = "${SITE_URL}";	  // app的url前缀,在ajax调用的时候，应该加上该前缀
+    var static_url = "${STATIC_URL}"; // 静态资源前缀
+</script>
+</%block>
+
+
+<%block name="scriptfile">
+<!-- datatables js -->
+<script src="${STATIC_URL}assets/datatables-1.10.15/media/js/jquery.dataTables.js"></script>
+<script src="${STATIC_URL}assets/datatables-1.10.15/media/js/dataTables.bootstrap.js"></script>
+<script src="${STATIC_URL}assets/datatables-1.10.15/media/js/jszip.min.js"></script>
+<script src="${STATIC_URL}assets/datatables-1.10.15/extensions/Select/js/dataTables.select.min.js"></script>
+<script src="${STATIC_URL}assets/datatables-1.10.15/extensions/checkboxes/js/dataTables.checkboxes.js"></script>
+<script src="${STATIC_URL}assets/pdfmake-0.1.31/build/pdfmake.js"></script>
+<script src="${STATIC_URL}assets/pdfmake-0.1.31/build/vfs_fonts.js"></script>
+<script src="${STATIC_URL}assets/datatables-1.10.15/extensions/Buttons/js/dataTables.buttons.js"></script>
+<script src="${STATIC_URL}assets/datatables-1.10.15/extensions/Buttons/js/buttons.bootstrap.js"></script>
+<script src="${STATIC_URL}assets/datatables-1.10.15/extensions/Buttons/js/buttons.html5.js"></script>
+<script src="${STATIC_URL}assets/datatables-1.10.15/extensions/Buttons/js/buttons.print.js"></script>
+<script src="${STATIC_URL}assets/datatables-1.10.15/extensions/Buttons/js/buttons.flash.js"></script>
+
+<script src="${STATIC_URL}assets/toastr/toastr.js"></script>
+<script src="${STATIC_URL}assets/moment.js"></script>
+
+<script src="${STATIC_URL}assets/select2-3.5.2/select2.js"></script>
+<script src="${STATIC_URL}assets/jquery.sumoselect-2.0.0/jquery.sumoselect.min.js"></script>
+
+
+<script src="${STATIC_URL}js/vue.min.js"></script>
+<script src="${STATIC_URL}js/utils.js"></script>
+
+</%block>
+
+<%block name="script"></%block>

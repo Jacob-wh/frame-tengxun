@@ -1,0 +1,136 @@
+<%inherit file="/home_application/base_new.html"/>
+<%block name="content">
+<!-- Page Heading -->
+<div class="row page-header-box">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            资源统计
+        </h1>
+    </div>
+</div>
+<!-- /.row -->
+<style type="text/css">
+    a{
+        color: white;
+    }
+</style>
+<div class="row data-panel">
+    <div class="col-lg-3 col-md-6">
+        <div class="king-widget2">
+            <div class="king-widget-content p20 bg-info">
+                <div class="king-counter king-counter-lg">
+                    <div class="king-counter-label text-uppercase f16">
+                        <a href="${SITE_URL}vmware/datacenter/manage">
+                            <i class="icon mr5 iconfont icon-shujuzhongxin"></i>数据中心
+                        </a>
+                    </div>
+                    <div class="king-counter-number-group">
+                        <span class="king-counter-number white">${datacenter} 个</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="king-widget2">
+            <div class="king-widget-content p20 bg-info">
+                <div class="king-counter king-counter-lg">
+                    <div class="king-counter-label text-uppercase f16">
+                        <a href="${SITE_URL}vmware/cluster/manage">
+                            <i class="icon mr5 iconfont icon-cluster"></i>集群
+                        </a>
+                    </div>
+                    <div class="king-counter-number-group">
+                        <span class="king-counter-number white">${cluster} 个</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="king-widget2">
+            <div class="king-widget-content p20 bg-info">
+                <div class="king-counter king-counter-lg">
+                    <div class="king-counter-label text-uppercase f16">
+                        <a href="${SITE_URL}vmware/vm/manage">
+                            <i class="icon mr5 iconfont icon-xuniji"></i>虚拟机
+                        </a>
+                    </div>
+                    <div class="king-counter-number-group">
+                        <span class="king-counter-number white">${vm} 个</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="king-widget2">
+            <div class="king-widget-content p20 bg-info">
+                <div class="king-counter king-counter-lg">
+                    <div class="king-counter-label text-uppercase f16">
+                        <a href="${SITE_URL}vmware/storage/manage">
+                            <i class="icon mr5 iconfont icon-portal-icon-cunchu"></i>存储
+                        </a>
+                    </div>
+                    <div class="king-counter-number-group">
+                        <span class="king-counter-number white">${storage} T</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.row -->
+
+<div class="row charts">
+    <div class="col-md-6">
+        <div class="king-block king-block-bordered mb30">
+            <div class="king-block-header">
+                <h3 class="king-block-title">内存分布</h3>
+            </div>
+            <div class="king-block-content">
+                <div class="chart" id="memory_analysis"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="king-block king-block-bordered mb30">
+            <div class="king-block-header">
+                <h3 class="king-block-title">CPU分布</h3>
+            </div>
+            <div class="king-block-content">
+                <div class="chart" id="cpu_analysis"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="king-block king-block-bordered mb30">
+            <div class="king-block-header">
+                <h3 class="king-block-title">存储分布</h3>
+            </div>
+            <div class="king-block-content">
+                <div class="chart" id="storage_analysis"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="king-block king-block-bordered mb30">
+            <div class="king-block-header">
+                <h3 class="king-block-title">CPU-Core分布</h3>
+            </div>
+            <div class="king-block-content">
+                <div class="chart" id="flow_analysis"></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- /.row -->
+</%block>
+
+<%block name="script">
+<!-- 包括所有kendoui的js插件或者可以根据需要使用的js插件调用　-->
+<!--<script src="https://magicbox.bkclouds.cc/static_api/v3/assets/kendoui-2015.2.624/js/kendo.all.min.js"></script>-->
+<script src="${STATIC_URL}js/magicbox.kendo.all.min.js"></script>
+<script src="${STATIC_URL}js/overview_manage.js"></script>
+</%block>

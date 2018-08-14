@@ -1,0 +1,387 @@
+<%inherit file="/home_application/base_new.html"/>
+
+<%block name="css">
+<!--本模块加载的css-->
+<link href="${STATIC_URL}assets/art-dialog/css/dialog.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="${STATIC_URL}assets/jquery-ui-1.12.1.custom/jquery-ui.css">
+<link rel="stylesheet" href="${STATIC_URL}assets/jquery-ui-1.12.1.custom/jquery-ui.structure.css">
+<link rel="stylesheet" href="${STATIC_URL}assets/jquery-ui-1.12.1.custom/jquery-ui.theme.css">
+<link rel="stylesheet" href="${STATIC_URL}css/userDefined.css">
+<style>
+
+</style>
+</%block>
+
+<%block name="content">
+<div class="row page-header-box">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            云提供商配置
+        </h1>
+    </div>
+</div>
+<div class="main-wrap" id="vcenter_config">
+    <div class="panel panel-default">
+        <div class="panel-heading" @click="vcenterIsShow=!vcenterIsShow">
+            VMware配置
+            <i class="fa fa-bars" style="float:right"></i>
+        </div>
+        <div class='panel-body' id="account_info" v-show="vcenterIsShow">
+            <div class="col-sm-8">
+                <form class="form-horizontal mt15" action="" id="vmware_form" @submit.prevent="onSubmit">
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="vcenter_account_name">帐号名称:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="请输入Vcenter用户名" id="vcenter_account_name" name="vcenter_account_name" AutoComplete>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="vcenter_account_password">帐号密码:</label>
+                        <div class="col-sm-9">
+                            <input type="password" class="form-control" placeholder="请输入Vcenter密码" id="vcenter_account_password" name="vcenter_account_password">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="vcenter_host">主机地址:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="请输入Vcenter主机IP" id="vcenter_host" name="vcenter_host" AutoComplete>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="vcenter_port">访问端口:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="请输入Vcenter主机端口" id="vcenter_port" name="vcenter_port" AutoComplete>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">版本:</label>
+                        <div class="col-sm-9">
+                            <div id="vcenter_version" style="display:inline-block;width:90%">
+                                <!-- select2 通过javascript start -->
+                                <input type="hidden" class="select2_box" style="width:100%;" >
+                                <!-- select2 通过javascript end -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3"></label>
+                        <div class="col-sm-9">
+                            <button class="king-btn king-info mr10" title="保存" id="btn-validate" onclick="VCenterConfig.createVCenterAccount();">
+                            <i class="fa fa-save btn-icon"></i>保存
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>  
+    <div class="panel panel-default">
+        <div class="panel-heading" @click="qcloudIsShow=!qcloudIsShow">
+            腾讯云配置
+            <i class="fa fa-bars" style="float:right"></i>
+        </div>
+        <div class='panel-body' id="account_info" v-show="qcloudIsShow">
+            <div class="col-sm-8">
+                <form class="form-horizontal mt15" action="" id="qcloud_form" @submit.prevent="onSubmit">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="qcloud_account_name">帐号名称:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="请输入腾讯云用户名" id="qcloud_account_name" name="qcloud_account_name" AutoComplete>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="qcloud_secret_id">SecretId:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="请输入SecretId" id="qcloud_secret_id" name="qcloud_secret_id" AutoComplete>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="qcloud_secret_key">SecretKey:</label>
+                        <div class="col-sm-9">
+                            <input type="password" class="form-control" placeholder="请输入SecretKey" id="qcloud_secret_key" name="qcloud_secret_key" AutoComplete>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">区域:</label>
+                        <div class="col-sm-9">
+                            <div id="qcloud_region" style="display:inline-block;width:90%">
+                                <!-- select2 通过javascript start -->
+                                <input type="hidden" class="select2_box" style="width:100%;" >
+                                <!-- select2 通过javascript end -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="validation_select"></label>
+                        <div class="col-sm-9">
+                            <button class="king-btn king-info mr10" title="保存" id="btn-validate" onclick="VCenterConfig.createQcloudAccount();">
+                            <i class="fa fa-save btn-icon"></i>保存
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading" @click="aliyunIsShow=!aliyunIsShow">
+            阿里云配置
+            <i class="fa fa-bars" style="float:right"></i>
+        </div>
+        <div class='panel-body' id="account_info" v-show="aliyunIsShow">
+            <div class="col-sm-8">
+                <form class="form-horizontal mt15" action="" id="aliyun_form" @submit.prevent="onSubmit">
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="aliyun_account_name">AccountName:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="请输入AccountName" id="aliyun_account_name" name="aliyun_public_key" AutoComplete>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="aliyun_access_id">AccessKeyId:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="请输入AccessKeyId" id="aliyun_access_id" name="aliyun_public_key" AutoComplete>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="aliyun_access_key">AccessKey:</label>
+                        <div class="col-sm-9">
+                            <input type="password" class="form-control" placeholder="请输入AccessKey" id="aliyun_access_key" name="aliyun_private_key" AutoComplete>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">区域:</label>
+                        <div class="col-sm-9">
+                            <div id="aliyun_region" style="display:inline-block;width:90%">
+                                <!-- select2 通过javascript start -->
+                                <input type="hidden" class="select2_box" style="width:100%;" >
+                                <!-- select2 通过javascript end -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="validation_select"></label>
+                        <div class="col-sm-9">
+                            <button class="king-btn king-info mr10" title="保存" id="btn-validate" onclick="VCenterConfig.createAliyunAccount();">
+                            <i class="fa fa-save btn-icon"></i>保存
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading" @click="azureIsShow=!azureIsShow">
+            微软云配置
+            <i class="fa fa-bars" style="float:right"></i>
+        </div>
+        <div class='panel-body' id="account_info" v-show="azureIsShow">
+            <div class="col-sm-8">
+                <form class="form-horizontal mt15" action="" id="azure_form" @submit.prevent="onSubmit">
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="azure_account_name">AccountName:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="请输入AccountName" id="aliyun_account_name" name="aliyun_public_key" AutoComplete>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="azure_access_id">AccessKeyId:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="请输入AccessKeyId" id="aliyun_access_id" name="aliyun_public_key" AutoComplete>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="azure_access_key">AccessKey:</label>
+                        <div class="col-sm-9">
+                            <input type="password" class="form-control" placeholder="请输入AccessKey" id="aliyun_access_key" name="aliyun_private_key" AutoComplete>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">区域:</label>
+                        <div class="col-sm-9">
+                            <div id="azure_region" style="display:inline-block;width:90%">
+                                <!-- select2 通过javascript start -->
+                                <input type="hidden" class="select2_box" style="width:100%;" >
+                                <!-- select2 通过javascript end -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="validation_select"></label>
+                        <div class="col-sm-9">
+                            <button class="king-btn king-info mr10" title="保存" id="btn-validate" onclick="VCenterConfig.createAliyunAccount();">
+                            <i class="fa fa-save btn-icon"></i>保存
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default hidden">
+        <div class="panel-heading" @click="ucloudIsShow=!ucloudIsShow">
+            UCLOUD配置
+            <i class="fa fa-bars" style="float:right"></i>
+        </div>
+        <div class='panel-body' id="account_info" v-show="ucloudIsShow">
+            <div class="col-sm-8">
+                <form class="form-horizontal mt15" action="" id="ucloud_form" @submit.prevent="onSubmit">
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="ucloud_account_name">帐号名称:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="请输入Ucloud用户名" id="ucloud_account_name" name="ucloud_account_name" AutoComplete>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="ucloud_public_key">PublicKey:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="请输入PublicKey" id="ucloud_public_key" name="ucloud_public_key" AutoComplete>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="ucloud_private_key">PrivateKey:</label>
+                        <div class="col-sm-9">
+                            <input type="password" class="form-control" placeholder="请输入PrivateKey" id="ucloud_private_key" name="ucloud_private_key" AutoComplete>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="ucloud_project_id">ProjectId:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" placeholder="请输入ProjectId " id="ucloud_project_id" name="ucloud_project_id" AutoComplete>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">区域:</label>
+                        <div class="col-sm-9">
+                            <div id="ucloud_region" style="display:inline-block;width:90%">
+                                <!-- select2 通过javascript start -->
+                                <input type="hidden" class="select2_box" style="width:100%;" >
+                                <!-- select2 通过javascript end -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="validation_select"></label>
+                        <div class="col-sm-9">
+                            <button class="king-btn king-info mr10" title="保存" id="btn-validate" onclick="VCenterConfig.createUcloudAccount();">
+                            <i class="fa fa-save btn-icon"></i>保存
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            云厂商账号列表
+        </div>
+        <div class="panel-btns">
+            <a type="button" class="king-btn king-info pull-left mt15 ml15" id="deleteCloudAccount" onclick="VCenterConfig.deleteAccount()">
+                <i class="fa fa-trash-o mr5"></i>删除账号
+            </a>
+<!--                <a type="button" data-type="success" onclick="VCenterConfig.desctroyAccount()"  class="king-btn king-info pull-left mt15 ml15" >
+                <i class="fa fa-archive mr5"></i>清除账号与所属资源
+            </a>
+            <a type="button" onclick="VCenterConfig.setSyncPolicy();"  class="king-btn king-info pull-left mt15 ml15" >
+                <i class="fa fa-spinner mr5"></i>设置同步策略
+            </a>  -->
+        </div>
+        <div class='panel-body panel-search-body'>
+            <div class="panel-content">
+                <table id="vcenter_config_record" class="table table-bordered table-hover table-striped">
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="hidden" id="vcenterDetailsShade" >
+    <section data-type="close" id="vcenterDetails">
+        <div class="container">
+            <div class="row">
+                <span class="sub-title">云厂商名称：</span>
+                <span class="sub-content">{{vcenterAccountData.cloud_provider}}</span>
+            </div>
+            <div class="row">
+                <span class="sub-title">账号名称：</span>
+                <span class="sub-content">{{vcenterAccountData.account_name}}</span>
+            </div>
+            <div v-show="vcenterAccountData.cloud_provider=='vmware'?true:false">
+                <div class="row">
+                    <span class="sub-title">账号密码：</span>
+                    <span v-show="!passwordShow"> ****** </span>
+                    <span class="sub-content" v-show="passwordShow">{{vcenterAccountData.account_password}}</span>
+                    <i class="fa fa-eye ml10" @click="passwordShow=!passwordShow"></i>
+                </div>
+                <div class="row">
+                    <span class="sub-title">主机地址：</span>
+                    <span class="sub-content">{{vcenterAccountData.vcenter_host}}</span>
+                </div>
+                <div class="row">
+                    <span class="sub-title">端口号：</span>
+                    <span class="sub-content">{{vcenterAccountData.vcenter_port}}</span>
+                </div>
+            </div>
+            
+            <div v-show="vcenterAccountData.cloud_provider=='qcloud'?true:false">
+                <div class="row">
+                    <span class="sub-title">SecretId：</span>
+                    <span class="sub-content">{{vcenterAccountData.cloud_public_key}}</span>
+                </div>
+                <div class="row">
+                    <span class="sub-title">SecretKey：</span>
+                    <span v-show="!passwordShow"> ****** </span>
+                    <span class="sub-content" v-show="passwordShow">{{vcenterAccountData.cloud_private_key}}</span>
+                    <i class="fa fa-eye ml10" @click="passwordShow=!passwordShow"></i>
+                </div>
+            </div>
+            <div v-show="vcenterAccountData.cloud_provider=='ucloud'?true:false">
+                <div class="row">
+                    <span class="sub-title">PublicKey：</span>
+                    <span class="sub-content">{{vcenterAccountData.cloud_public_key}}</span>
+                </div>
+                <div class="row">
+                    <span class="sub-title">PrivateKey：</span>
+                    <span v-show="!passwordShow"> ****** </span>
+                    <span class="sub-content" v-show="passwordShow">{{vcenterAccountData.cloud_private_key}}</span>
+                    <i class="fa fa-eye ml10" @click="passwordShow=!passwordShow"></i>
+                </div>
+                <div class="row">
+                    <span class="sub-title">ProjectId：</span>
+                    <span class="sub-content">{{vcenterAccountData.project_id}}</span>
+                </div>
+                <div class="row">
+                    <span class="sub-title">区域：</span>
+                    <span class="sub-content">{{vcenterAccountData.cloud_region}}</span>
+                </div>
+            </div>
+
+            <div class="row" v-show="vcenterAccountData.cloud_provider=='vmware'?true:false">
+                <span class="sub-title">版本：</span>
+                <span class="sub-content">{{vcenterAccountData.vcenter_version}}</span>
+            </div>
+        </div>
+        <div class="close-btn open" id="close" data-type="close">关闭</div>
+    </section>
+</div>
+</%block>
+<%block name="script">
+<script type="text/javascript" src="${STATIC_URL}assets/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+<script type="text/javascript" src="${STATIC_URL}assets/art-dialog/dist/dialog.js"></script>
+<script src="${STATIC_URL}js/magicbox.jquery.validate.js"></script>
+<script src="${STATIC_URL}js/vmware_config.js"></script>
+</%block>

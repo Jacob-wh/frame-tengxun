@@ -1,0 +1,217 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>YDVMSAAS</title>
+    <link href="${STATIC_URL}css/cmp_icon/iconfont.css" rel="stylesheet">
+
+    <%block name="cssfile"></%block>
+    <%block name="css"></%block>
+</head>
+
+<body>
+<%block name="menu">
+
+<%
+overView = vmwareDatacenterManage = vmwareClusterManage = vmwareStorageManage =vmwareVmManage = vmwareSystemConfig = qcloudView = ucloudView = ''
+relative_path = APP_PATH
+if relative_path.startswith(SITE_URL + "overview/"):
+    overView = 'active'
+elif relative_path.startswith(SITE_URL + "vmware/datacenter/manage/"):
+    vmwareDatacenterManage = 'active'
+elif relative_path.startswith(SITE_URL + "vmware/cluster/manage/"):
+    vmwareClusterManage = 'active'
+elif relative_path.startswith(SITE_URL + "vmware/storage/manage/"):
+    vmwareStorageManage = 'active'
+elif relative_path.startswith(SITE_URL + "vmware/vm/manage/"):
+    vmwareVmManage = 'active'
+elif relative_path.startswith(SITE_URL + "vmware/system/config/"):
+    vmwareSystemConfig = 'active'
+elif relative_path.startswith(SITE_URL + "qcloud/"):
+    qcloudView = 'active'
+elif relative_path.startswith(SITE_URL + "ucloud/"):
+    ucloudView = 'active'
+%>
+
+<style type="text/css">
+    .logo{
+        width: 85px;
+        height: 48px;
+        display: inline-block;
+        background-image: url("${STATIC_URL}img/yd-logo-default.png");
+        background-size: 170px 100px;
+        background-position: -85px -50px;
+        margin-top: -10px;
+    }
+    .logo-lg{
+        display: inline-block;
+        font-weight: bold;
+        text-shadow:5px 5px 15px #1296db;
+        font-size: 2.8rem;
+        vertical-align: top;
+    }
+    .logo-img{
+        margin-top: -14px;
+    }
+</style>
+<div id="wrapper">
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="${SITE_URL}">
+                <span class="logo"></span>
+                <span class="logo-lg">YDVM</span>
+            </a>
+        </div>
+        <!-- Top Menu Items -->
+        <ul class="nav navbar-right top-nav">
+            <li class="dropdown">
+                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa mr5 fa-user"></i> ${request.user.username} <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <!--li>
+                        <a href="javascript:;"><i class="fa mr5 fa-user"></i>用户管理</a>
+                    </li-->
+                    <li class="divider"></li>
+                    <li>
+                        <a id="logout" href="${SITE_URL}account/logout/"><i class="fa mr5 fa-power-off"></i> 退出</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav side-nav">
+                <li class="${overView}">
+                    <a href="${SITE_URL}overview/"><i class="icon mr5 iconfont icon-tongjifenxi"></i>资源统计</a>
+                </li>
+
+                <li class="${vmwareDatacenterManage}">
+                    <a href="${SITE_URL}vmware/datacenter/manage"><i class="icon mr5 iconfont icon-shujuzhongxin"></i>数据中心</a>
+                </li>
+
+                <li class="${vmwareClusterManage}">
+                    <a href="${SITE_URL}vmware/cluster/manage"><i class="icon mr5 iconfont icon-cluster"></i>集群</a>
+                </li>
+
+                <li class="${vmwareStorageManage}">
+                    <a href="${SITE_URL}vmware/storage/manage"><i class="icon mr5 iconfont icon-portal-icon-cunchu"></i>存储</a>
+                </li>
+
+                <li class="${vmwareStorageManage}">
+                    <a href="${SITE_URL}vmware/network/manage"><i class="icon mr5 iconfont icon-internet-other"></i>网络</a>
+                </li>
+
+                <li class="${vmwareVmManage}">
+                    <a href="${SITE_URL}vmware/vm/manage"><i class="icon mr5 iconfont icon-xuniji"></i>虚拟机</a>
+                </li>
+
+                <li>
+                    <a href="${SITE_URL}vmware/host/manage"><i class="fa mr5 fa-cubes"></i>物理机</a>
+                </li>
+
+                <li>
+                    <a href="javascript:;" data-toggle="collapse" data-target="#cloud_provider"><i class="fa mr5 fa-jsfiddle"></i>云资源<i class="fa mr5 fa-caret-down pull-right"></i></a>
+                    <ul id="cloud_provider" class="collapse">
+                        <li class="${qcloudView}">
+                            <a href="${SITE_URL}qcloud/">腾讯云</a>
+                        </li>
+                        <li>
+                            <a href="${SITE_URL}aliyun/">阿里云</a>
+                        </li>
+                        <li>
+                            <a href="${SITE_URL}azure/">微软云</a>
+                        </li>
+                        <!--li class="${ucloudView}">
+                            <a href="${SITE_URL}ucloud/">UCloud</a>
+                        </li-->
+                    </ul>
+                </li>
+
+                <!--li>
+                    <a href="javascript:;" data-toggle="collapse" data-target="#bill_report"><i class="fa mr5  fa-dollar"></i>计费<i class="fa mr5 fa-caret-down pull-right"></i></a>
+                    <ul id="bill_report" class="collapse">
+                        <li>
+                            <a href="${SITE_URL}bill/day">每日消费消费</a>
+                        </li>
+                        <li>
+                            <a href="${SITE_URL}bill/month">每月消费消费</a>
+                        </li>
+                        <li>
+                            <a href="${SITE_URL}bill/year">每年消费消费</a>
+                        </li>
+                    </ul>
+                </li-->
+
+
+                <!--li>
+                    <a href="http://cmdb.bking.com"><i class="fa mr5 fa-bank"></i>资产</a>
+                </li>
+
+                <li>
+                    <a href="http://paas.bking.com:80/o/bk_monitor/"><i class="fa mr5 fa-desktop"></i>监控</a>
+                </li>
+
+                <li>
+                    <a href="${SITE_URL}vmware/system/config"><i class="fa fa-tasks mr5"></i>事件</a>
+                </li-->
+
+                <li class="${vmwareSystemConfig}">
+                    <a href="${SITE_URL}vmware/system/config"><i class="iconfont mr5 icon-xitongpeizhi"></i>配置</a>
+                </li>
+
+
+
+
+                <!--li>
+                    <a href="${SITE_URL}vmware/user/manage/"><i class="fa mr5 fa-users"></i>用户管理</a>
+                </li>
+
+                <li>
+                    <a href="${SITE_URL}vmware/department/manage/"><i class="fa mr5 fa-book"></i>组织管理</a>
+                </li-->
+
+
+
+
+
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </nav>
+
+    <div id="page-wrapper">
+
+        <div class="container-fluid iframe-container">
+            <%block name="content">
+            </%block>
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</div>
+<!-- /#page-wrapper -->
+    <!-- /#page-wrapper -->
+
+</%block>
+
+
+<%block name="scriptfile"></%block>
+
+<script src="${STATIC_URL}js/csrftoken.js"></script>
+
+<%block name="script"></%block>
+
+</body>
+
+</html>

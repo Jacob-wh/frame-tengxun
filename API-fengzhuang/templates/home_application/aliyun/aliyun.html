@@ -1,0 +1,139 @@
+<%inherit file="/home_application/base_new.html"/>
+<%block name="css">
+<!--本模块加载的css-->
+<link href="${STATIC_URL}assets/art-dialog/css/dialog.css" rel="stylesheet" type="text/css" />
+</%block>
+<%block name="content">
+
+<!-- Page Heading -->
+<div class="row page-header-box">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            阿里云
+        </h1>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        虚拟机实例
+    </div>
+    <div>
+        <div class="king-wrapper hidden">
+            <form class="form-inline king-search-form king-no-bg mt15 mb15 pull-left">
+                <div class="form-group">
+                    <label>用户账号：</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="请输入用户账号">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-time fa fa-calendar-o"></i></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>用户名：</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="请输入用户账号">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-time fa fa-calendar-o"></i></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>状态：</label>
+                    <div class="input-group">
+                        <select class="form-control">
+                            <option value="1">待审核</option>
+                            <option value="2">全部</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit" class="king-btn king-info">搜索</button>
+            </form>
+            <a type="button" id="transferID" class="king-btn king-success pull-right mt15 ml15">
+                <i class="fa fa-gavel mr5"></i>审核
+            </a>
+            <a href="user_add.html" class="king-btn king-info pull-right mt15 ml15">
+                <i class="fa fa-user-plus mr5"></i>新增用户
+            </a>
+        </div>
+
+        <div class='panel-body'>
+            <div class="panel-content">
+                <table id="aliyun_manage_record" class="table table-bordered table-hover table-striped">
+                </table>
+            </div>
+        </div>
+        <table class="table table-out-bordered table-hover hidden">
+            <thead>
+            <tr>
+                <th style="width:50px;">序号</th>
+                <th>实例名称</th>
+                <th>实例类型</th>
+                <th>CPU</th>
+                <th>内存</th>
+                <th>状态</th>
+                <th>区域</th>
+                <th>实例计费类型</th>
+                <th>内网IP</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>1</td>
+                <td>admin</td>
+                <td>系统管理员</td>
+                <td>admin</td>
+                <td>男</td>
+                <td>123344@gamil.com</td>
+                <td>13502569874</td>
+                <td>广东省-广州市</td>
+                <td>2015-06-07 21:45</td>
+            </tr>
+
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="12">
+                    <div class="pagination-info pull-left">共4条记录，当前第1/1页，每页20条记录</div>
+                    <div class="pull-right king-page-box">
+
+                        <ul class="pagination pagination-small pull-right">
+                            <li page-index="1" class="disabled"><a>«</a></li>
+                            <li page-index="1" class="active"><a>1</a></li>
+                            <li page-index="1"><a href="javascript:;">2</a></li>
+                            <li page-index="1"><a href="javascript:;">3</a></li>
+                            <li page-index="1"><a href="javascript:;">4</a></li>
+                            <li page-index="1"><a href="javascript:;">»</a></li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+            </tfoot>
+                    <template id="tpl_1508140107778" hidden>
+                        <tr>
+                            <td style="width: 100px;">#id#</td>
+                            <td style="width: 20%;">#instanceName#</td>
+                            <td style="width: 20%;">#instanceType#</td>
+                            <td style="width: 20%;">#cpu#</td>
+                            <td style="width: 20%;">#memory#</td>
+                            <td style="width: 20%;">#status#</td>
+                            <td style="width: 20%;">#zone#</td>
+                            <td style="width: 20%;">#instanceChargeType#</td>
+                            <td>#inner_ip_address#</td>
+                        </tr>
+                    </template>
+        </table>
+
+    </div>
+
+</div>
+<link rel="stylesheet" type="text/css" href="${STATIC_URL}css/left-side.css">
+<script type="text/javascript" src="${STATIC_URL}assets/highcharts-4.1.7/js/highcharts.js"></script>
+<script type="text/javascript" src="${STATIC_URL}assets/highcharts-4.1.7/js/highcharts-more.js"></script>
+<script type="text/javascript" src="${STATIC_URL}js/graph-highcharts.js"></script>
+<script type="text/javascript" src="${STATIC_URL}assets/art-dialog/dist/dialog.js"></script>
+<script type="text/javascript" src="${STATIC_URL}assets/twitter-bootstrap-wizard/jquery.bootstrap.wizard.js"></script>
+<script type="text/javascript" src="${STATIC_URL}assets/twitter-bootstrap-wizard/prettify.js"></script>
+<script type="text/javascript" src="${STATIC_URL}js/aliyun_manage.js"></script>
+</%block>

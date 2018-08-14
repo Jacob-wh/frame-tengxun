@@ -1,0 +1,131 @@
+<%inherit file="/home_application/base_new.html"/>
+<%block name="content">
+
+<style type="text/css">
+    .terminal {
+        border: #000 solid 5px;
+        font-family: "Monaco", "DejaVu Sans Mono", "Liberation Mono", monospace;
+        font-size: 11px;
+        color: #f0f0f0;
+        background: #000;
+        width: 600px;
+        box-shadow: rgba(0, 0, 0, 0.8) 2px 2px 20px;
+    }
+
+    .reverse-video {
+        color: #000;
+        background: #f0f0f0;
+    }
+</style>
+
+<div class="row page-header-box">
+    <div class="col-lg-10">
+        <h1 class="page-header">
+            WebSSH连接
+        </h1>
+    </div>
+    <div class="col-lg-2">
+        <h1 class="page-header">
+            <a class="king-btn king-info" title="返回" onclick="history.go(-1)" id="back_btn_id">
+                <i class="fa fa-reply mr5"></i> 返回
+            </a>
+        </h1>
+    </div>
+</div>
+<div class="main-wrap" id="vcenter_config">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            WebSSH账号配置
+        </div>
+        <div class='panel-body'>
+
+            <div class="col-sm-8">
+                <form class="form-horizontal mt15" id="connect">
+                    <div class="form-group">
+                        <label class="col-sm-2 col-xs-4 control-label">目标主机</label>
+                        <div class="col-sm-10 col-xs-8">
+                            <input type="text" id="username" class="col-sm-4 col-xs-10"  placeholder="请输入主机用户名" />
+                            <span class="add-on" style="float:left">@</span>
+                            <input  type="text" id="hostname" class="col-sm-4 col-xs-10"  placeholder="请注入主机IP或域名" />
+                            <span class="add-on" style="float:left">port</span>
+                            <input type="text"  id="portnumber" class="col-sm-2 col-xs-10"  value="22" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-xs-4 control-label">
+                            认证类型
+                        </label>
+                        <div class="col-sm-10 col-xs-8">
+                            <label class="radio ml20 mr30" style="display:inline-block">
+                                <input type="radio" name="authentication_method" value="password" checked />密码
+                            </label>
+
+                            <label class="radio" style="display:inline-block">
+                                <input type="radio" name="authentication_method" value="private_key" />密钥
+                            </label>
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group" id="password_authentication">
+                        <label class="col-sm-2 col-xs-4 control-label">
+                            密码
+                        </label>
+                        <div class="col-sm-10 col-xs-8">
+                            <input type="password" id="password"  class="input-large" />
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="private_key_authentication">
+                        <label class="col-sm-2 col-xs-4 control-label">
+                            密钥
+                        </label>
+                        <div class="col-sm-10 col-xs-8">
+                            <textarea id="private_key" rows="6"
+                                      class="input-xxlarge"></textarea>
+                            <p class="help-block">
+                                从
+                                <code>~/.ssh/id_rsa</code>或
+                                <code>~/.ssh/id_dsa</code>
+                                拷贝粘贴你的私有密钥
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 col-xs-4 control-label">
+                            密钥密码
+                        </label>
+                        <div class="col-sm-10 col-xs-8">
+                            <input type="password" id="key_passphrase"
+                                   class="input-large" />
+                            <p class="help-block">
+                                如果你的私有密钥是加密的，请输入你的私有密钥密码，否则可以不用输入
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 col-xs-4 control-label"></label>
+                        <div class="col-sm-10 col-xs-8">
+                            <button class="king-btn king-info mr10" title="登录" >
+                                <i class="fa fa-sign-in btn-icon"></i>登录
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div id="term">
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</%block>
+<%block name="script">
+<script src="${STATIC_URL}js/term.js"></script>
+<script src="${STATIC_URL}js/wssh.js"></script>
+</%block>
